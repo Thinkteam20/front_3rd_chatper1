@@ -4,7 +4,13 @@
 // 3. children은 평탄화(flat)되어야 하며, falsy 값은 필터링되어야 합니다.
 // 4. Infinity를 사용하여 모든 깊이의 배열을 평탄화하세요.
 
-export function createVNode(type, props, ...children) {
-  // 여기에 구현하세요
-  return {}
+export function createVNode(type, props = {}, ...children) {
+    const flatChildren = children.flat(Infinity);
+    const validChildren = flatChildren.filter(child => child !== null && child !== undefined && child !== false);
+
+    return {
+        type,
+        props: props || null, // Ensure that props defaults to null if not provided
+        children: validChildren,
+    };
 }
